@@ -357,7 +357,15 @@ def train_model(model, train_loader, val_loader, num_epochs=50):
     plt.savefig('eeg_pytorch_training_history.png')
     print("\n📊 Training history plot saved as 'eeg_pytorch_training_history.png'")
     
-    return model
+    # Create history dictionary
+    history = {
+        'train_loss': train_losses,
+        'val_loss': val_losses,
+        'train_acc': train_accs,
+        'val_acc': val_accs
+    }
+
+    return model, history
 
 def evaluate_model(model, test_loader, y_test):
     """Evaluate the model"""
@@ -421,7 +429,7 @@ def main():
     print(model)
     
     # Train model
-    model = train_model(model, train_loader, val_loader, num_epochs=30)
+    model, history = train_model(model, train_loader, val_loader, num_epochs=30)
     
     # Evaluate model
     accuracy, predictions = evaluate_model(model, test_loader, y_test)

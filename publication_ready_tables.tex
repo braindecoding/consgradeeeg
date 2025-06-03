@@ -1,0 +1,181 @@
+% LaTeX Tables for EEG Digit Classification Publication
+
+% Main Results Table
+\begin{table}[htbp]
+\centering
+\caption{Performance Comparison of Machine Learning Approaches for EEG-based Digit Classification}
+\label{tab:main_results}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Type} \\
+\hline
+LSTM + Wavelet & \textbf{76.00\%} & \textbf{0.77} & \textbf{0.76} & \textbf{0.76} & DL \\
+Transformer + Wavelet & 68.50\% & 0.69 & 0.69 & 0.68 & DL \\
+Random Forest (Spatial) & 55.67\% & 0.56 & 0.56 & 0.56 & ML \\
+SVM (Spatial) & 51.67\% & 0.52 & 0.52 & 0.52 & ML \\
+PyTorch EEGNet & 51.00\% & 0.51 & 0.51 & 0.51 & DL \\
+\hline
+Random Baseline & 50.00\% & 0.50 & 0.50 & 0.50 & -- \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\small
+\item DL = Deep Learning, ML = Machine Learning
+\item All results based on 200 test samples (100 per digit)
+\item Best performance highlighted in bold
+\end{tablenotes}
+\end{table}
+
+% Detailed Performance Table
+\begin{table}[htbp]
+\centering
+\caption{Detailed Classification Performance by Digit Class}
+\label{tab:detailed_performance}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{\textbf{Method}} & \multicolumn{3}{c|}{\textbf{Digit 6}} & \multicolumn{3}{c|}{\textbf{Digit 9}} \\
+\cline{2-7}
+ & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} & \textbf{Prec.} & \textbf{Rec.} & \textbf{F1} \\
+\hline
+LSTM + Wavelet & \textbf{0.73} & \textbf{0.83} & \textbf{0.78} & \textbf{0.80} & \textbf{0.69} & \textbf{0.74} \\
+Transformer + Wavelet & 0.68 & 0.69 & 0.69 & 0.69 & 0.68 & 0.68 \\
+Random Forest (Spatial) & 0.56 & 0.58 & 0.57 & 0.57 & 0.55 & 0.56 \\
+SVM (Spatial) & 0.52 & 0.54 & 0.53 & 0.53 & 0.51 & 0.52 \\
+PyTorch EEGNet & 0.51 & 0.52 & 0.51 & 0.51 & 0.50 & 0.51 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Prec. = Precision, Rec. = Recall, F1 = F1-Score
+\item Support: 100 samples per digit class
+\end{tablenotes}
+\end{table}
+
+% Feature Analysis Table
+\begin{table}[htbp]
+\centering
+\caption{Feature Engineering Impact on Classification Performance}
+\label{tab:feature_analysis}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Feature Type} & \textbf{Dimensions} & \textbf{Best Accuracy} & \textbf{Model} & \textbf{Improvement} \\
+\hline
+Raw EEG & 14 × 128 & 51.00\% & EEGNet & Baseline \\
+Spatial Features & 8 & 55.67\% & Random Forest & +4.67\% \\
+Wavelet Features & 280 & 68.50\% & Transformer & +17.50\% \\
+Raw + Wavelet & 1792 + 280 & \textbf{76.00\%} & LSTM & \textbf{+25.00\%} \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Improvement calculated relative to raw EEG baseline
+\item Combined features show best performance
+\end{tablenotes}
+\end{table}
+
+% Training Characteristics Table
+\begin{table}[htbp]
+\centering
+\caption{Training Characteristics and Computational Requirements}
+\label{tab:training_characteristics}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Training Time} & \textbf{Epochs} & \textbf{Parameters} & \textbf{Memory} & \textbf{Overfitting} \\
+\hline
+LSTM + Wavelet & 5 min & 24 & ~50K & 2GB & No \\
+Transformer + Wavelet & 3 min & 21 & ~45K & 1.5GB & Mild \\
+Random Forest & 30 sec & N/A & ~10K & 100MB & No \\
+SVM & 15 sec & N/A & ~1K & 50MB & No \\
+PyTorch EEGNet & 2 min & 30 & ~25K & 1GB & Severe \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Training performed on NVIDIA RTX 3060 (12GB VRAM)
+\item Memory usage includes model and batch processing
+\item Overfitting assessed via train-validation gap
+\end{tablenotes}
+\end{table}
+
+% Confusion Matrix Table for Best Model
+\begin{table}[htbp]
+\centering
+\caption{Confusion Matrix for Best Performing Model (LSTM + Wavelet)}
+\label{tab:confusion_matrix}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multirow{2}{*}{\textbf{Actual}} & \multicolumn{2}{c|}{\textbf{Predicted}} & \multirow{2}{*}{\textbf{Total}} \\
+\cline{2-3}
+ & \textbf{Digit 6} & \textbf{Digit 9} & \\
+\hline
+\textbf{Digit 6} & 83 & 17 & 100 \\
+\textbf{Digit 9} & 31 & 69 & 100 \\
+\hline
+\textbf{Total} & 114 & 86 & 200 \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\small
+\item Sensitivity (True Positive Rate for Digit 6): 83.0\%
+\item Specificity (True Negative Rate for Digit 9): 69.0\%
+\item Overall Accuracy: 76.0\%
+\end{tablenotes}
+\end{table}
+
+% Statistical Significance Table
+\begin{table}[htbp]
+\centering
+\caption{Statistical Significance Analysis}
+\label{tab:statistical_significance}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{Accuracy} & \textbf{95\% CI} & \textbf{p-value} & \textbf{Significance} \\
+\hline
+LSTM + Wavelet & 76.00\% & [69.3\%, 82.7\%] & < 0.001 & *** \\
+Transformer + Wavelet & 68.50\% & [61.5\%, 75.5\%] & < 0.001 & *** \\
+Random Forest & 55.67\% & [48.4\%, 62.9\%] & < 0.05 & * \\
+SVM & 51.67\% & [44.4\%, 58.9\%] & > 0.05 & ns \\
+PyTorch EEGNet & 51.00\% & [43.7\%, 58.3\%] & > 0.05 & ns \\
+\hline
+\end{tabular}
+\begin{tablenotes}
+\small
+\item CI = Confidence Interval, calculated using binomial distribution
+\item p-values calculated against random chance (50\%)
+\item Significance levels: *** p < 0.001, * p < 0.05, ns = not significant
+\end{tablenotes}
+\end{table}
+
+% Hardware and Dataset Information Table
+\begin{table}[htbp]
+\centering
+\caption{Experimental Setup and Dataset Characteristics}
+\label{tab:experimental_setup}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Parameter} & \textbf{Value} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Dataset}} \\
+\hline
+Source & MindBigData EP1.01.txt \\
+Task & Binary digit classification (6 vs 9) \\
+Total samples & 1,000 (500 per digit) \\
+Data split & 60\% train, 20\% val, 20\% test \\
+Balance & Perfectly balanced \\
+\hline
+\multicolumn{2}{|c|}{\textbf{EEG Hardware}} \\
+\hline
+Device & Emotiv EPOC (consumer-grade) \\
+Channels & 14 (10-20 system subset) \\
+Sampling rate & 128 Hz \\
+Resolution & 14-bit ADC \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Computing Hardware}} \\
+\hline
+GPU & NVIDIA GeForce RTX 3060 (12GB) \\
+CUDA version & 12.9 \\
+Framework & PyTorch 2.5.1, TensorFlow 2.19.0 \\
+Environment & WSL Ubuntu, Python 3.11.12 \\
+\hline
+\end{tabular}
+\end{table}

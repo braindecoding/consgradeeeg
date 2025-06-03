@@ -8,14 +8,30 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 
+# Configure TensorFlow for GPU usage
 import tensorflow as tf
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv1D, MaxPooling1D, Input
+from tensorflow.keras.layers import Conv2D, SeparableConv2D, AveragePooling2D
 from tensorflow.keras.layers import BatchNormalization, Activation, AveragePooling1D
 from tensorflow.keras.layers import Reshape, Concatenate, LSTM, Bidirectional
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 from tensorflow.keras.utils import to_categorical
+
+# Configure GPU settings
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        # Enable memory growth to avoid allocating all GPU memory at once
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        print(f"🔥 TensorFlow GPU configured: {len(gpus)} GPU(s) available")
+        print(f"   GPU devices: {[gpu.name for gpu in gpus]}")
+    except RuntimeError as e:
+        print(f"⚠️ GPU configuration error: {e}")
+else:
+    print("⚠️ No GPU devices found for TensorFlow")
 
 # Suppress TensorFlow warnings
 tf.get_logger().setLevel('ERROR')
@@ -190,22 +206,24 @@ def build_eegnet_model(input_shape):
     reshaped = Reshape((input_shape[0], input_shape[1], 1))(input_layer)
     
     # Block 1: Temporal Convolution
-    block1 = Conv1D(F1, kernel_size=64, padding='same', 
-                   input_shape=(input_shape[0], input_shape[1], 1))(reshaped)
+    # Use Conv2D with kernel (1, temporal_kernel_size)
+    block1 = Conv2D(F1, (1, 64), padding='same', use_bias=False)(reshaped)
     block1 = BatchNormalization()(block1)
-    
+
     # Block 2: Spatial Convolution
-    block2 = Conv1D(F2, kernel_size=32, padding='same')(block1)
+    # Use Conv2D with kernel (channels, 1)
+    block2 = Conv2D(D * F1, (input_shape[0], 1), padding='valid',
+                   groups=F1, use_bias=False)(block1)
     block2 = BatchNormalization()(block2)
     block2 = Activation('elu')(block2)
-    block2 = MaxPooling1D(pool_size=4)(block2)
+    block2 = AveragePooling2D((1, 4))(block2)
     block2 = Dropout(0.5)(block2)
-    
+
     # Block 3: Separable Convolution
-    block3 = Conv1D(F2, kernel_size=16, padding='same')(block2)
+    block3 = SeparableConv2D(F2, (1, 16), padding='same', use_bias=False)(block2)
     block3 = BatchNormalization()(block3)
     block3 = Activation('elu')(block3)
-    block3 = MaxPooling1D(pool_size=4)(block3)
+    block3 = AveragePooling2D((1, 8))(block3)
     block3 = Dropout(0.5)(block3)
     
     # Classification
