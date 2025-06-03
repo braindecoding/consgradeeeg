@@ -1,0 +1,4 @@
+Model,Type,Accuracy,Training_Time,N_Samples,Interpretation
+spatial_random_forest,Random Forest with Spatial Features,0.5566666666666666,N/A,1000,Spatial processing features for digit discrimination
+spatial_svm,SVM with Spatial Features,0.5166666666666667,N/A,1000,Support Vector Machine with spatial features
+wavelet_analysis,Wavelet Feature Analysis,0.5,N/A,N/A,Frequency domain analysis using wavelets

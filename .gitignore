@@ -236,10 +236,16 @@ plots/
 !transformer_*_training_*.png
 !eegnet_*_training_*.png
 
-# Temporary result files with timestamps (regenerated each run)
-*_results_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.json
-*_results_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.csv
-*_results_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.tex
+# Temporary result files with timestamps - keep important ones
+# Ignore experimental/test runs
+*_test_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.json
+*_temp_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.json
+*_debug_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.json
+
+# Keep final experiment results with timestamps (important for documentation)
+!*_experiment_results_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.json
+!*_experiment_results_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.csv
+!*_results_table_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.tex
 
 # Keep final/template result files (important for publication)
 !final_experiment_results.json

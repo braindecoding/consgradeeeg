@@ -1,0 +1,72 @@
+{
+  "experiment_info": {
+    "timestamp": "2025-06-04T05:42:35.285536",
+    "python_version": "3.11.12 (main, Apr  9 2025, 08:55:55) [GCC 13.3.0]",
+    "dataset": "MindBigData EP1.01.txt",
+    "task": "Digit 6 vs 9 Classification",
+    "device": "Consumer-grade EEG (Emotiv EPOC)",
+    "channels": 14,
+    "sampling_rate": 128
+  },
+  "models": {
+    "spatial_random_forest": {
+      "model_type": "Random Forest with Spatial Features",
+      "accuracy": 0.5566666666666666,
+      "features_used": [
+        "Hemisphere_Dominance",
+        "Parietal_Occipital_Coherence",
+        "Alpha_Beta_Ratio",
+        "Spatial_Complexity",
+        "Cross_Hemisphere_Sync",
+        "Frontal_Asymmetry",
+        "Posterior_Power",
+        "Left_Right_Correlation"
+      ],
+      "n_features": 8,
+      "n_samples": 1000,
+      "training_time": "N/A",
+      "interpretation": "Spatial processing features for digit discrimination"
+    },
+    "spatial_svm": {
+      "model_type": "SVM with Spatial Features",
+      "accuracy": 0.5166666666666667,
+      "features_used": [
+        "Hemisphere_Dominance",
+        "Parietal_Occipital_Coherence",
+        "Alpha_Beta_Ratio",
+        "Spatial_Complexity",
+        "Cross_Hemisphere_Sync",
+        "Frontal_Asymmetry",
+        "Posterior_Power",
+        "Left_Right_Correlation"
+      ],
+      "n_features": 8,
+      "n_samples": 1000,
+      "training_time": "N/A",
+      "interpretation": "Support Vector Machine with spatial features"
+    },
+    "pytorch_eegnet": {
+      "error": "cannot unpack non-iterable EEGNet object"
+    },
+    "tensorflow_eegnet": {
+      "error": "TensorFlow script failed: 2025-06-04 05:43:01.411344: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered\nWARNING: All log messages before absl::InitializeLog() is called are written to STDERR\nE0000 00:00:1748990581.434253    6709 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered\nE0000 00:00:1748990581.439909    6709 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered\nW0000 00:00:1748990581.458307    6709 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\nW0000 00:00:1748990581.458360    6709 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\nW0000 00:00:1748990581.458365    6709 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\nW0000 00:00:1748990581.458367    6709 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.\n2025-06-04 05:43:01.463344: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.\nTo enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.\n/home/adb/.local/lib/python3.11/site-packages/keras/src/layers/convolutional/base_conv.py:113: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.\n  super().__init__(activity_regularizer=activity_regularizer, **kwargs)\nTraceback (most recent call last):\n  File \"/mnt/c/Users/Windows 11/Documents/repo/consgradeeeg/eeg_deep_learning.py\", line 326, in <module>\n    main()\n  File \"/mnt/c/Users/Windows 11/Documents/repo/consgradeeeg/eeg_deep_learning.py\", line 312, in main\n    model = build_eegnet_model(input_shape=(X_train.shape[1], X_train.shape[2]))\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/Windows 11/Documents/repo/consgradeeeg/eeg_deep_learning.py\", line 193, in build_eegnet_model\n    block1 = Conv1D(F1, kernel_size=64, padding='same', \n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/adb/.local/lib/python3.11/site-packages/keras/src/utils/traceback_utils.py\", line 122, in error_handler\n    raise e.with_traceback(filtered_tb) from None\n  File \"/home/adb/.local/lib/python3.11/site-packages/keras/src/ops/operation_utils.py\", line 184, in compute_conv_output_shape\n    raise ValueError(\nValueError: Kernel shape must have the same length as input, but received kernel of shape (64, 1, 8) and input of shape (None, 14, 128, 1).\n"
+    },
+    "wavelet_analysis": {
+      "model_type": "Wavelet Feature Analysis",
+      "accuracy": 0.5,
+      "features": "Discrete Wavelet Transform features",
+      "interpretation": "Frequency domain analysis using wavelets"
+    }
+  },
+  "summary": {
+    "total_experiments": 4,
+    "successful_experiments": 2,
+    "best_accuracy": 0.5566666666666666,
+    "worst_accuracy": 0.5,
+    "mean_accuracy": 0.5244444444444444,
+    "std_accuracy": 0.02377881617670298,
+    "best_model": "Random Forest with Spatial Features",
+    "baseline_random": 0.5,
+    "improvement_over_random": 0.05666666666666664
+  }
+}
