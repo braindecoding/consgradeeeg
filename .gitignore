@@ -192,3 +192,51 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# EEG Data Files
+# Exclude data directory containing EEG datasets for privacy and size reasons
+Data/
+data/
+*.txt
+*.csv
+*.mat
+*.edf
+*.bdf
+*.set
+*.fdt
+
+# Model checkpoints and training outputs
+models/
+checkpoints/
+*.pth
+*.h5
+*.pkl
+*.joblib
+
+# Generated figures and plots
+figures/
+plots/
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.svg
+
+# Temporary and cache files
+temp/
+tmp/
+cache/
+.cache/
+
+# Jupyter notebook outputs
+*.ipynb_checkpoints/
+
+# TensorBoard logs
+logs/
+tensorboard_logs/
+runs/
+
+# Large data files
+*.npy
+*.npz
+*.hdf5
