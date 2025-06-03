@@ -214,17 +214,27 @@ checkpoints/
 *.pkl
 *.joblib
 
-# Generated figures and plots (keep methodology figures, ignore training plots)
+# Generated figures and plots - selective ignoring
 figures/
 plots/
-*training_history.png
-*_training_*.png
-*_plot_*.png
+
+# Ignore temporary/experimental plots
+*_temp_*.png
+*_experiment_*.png
+*_test_*.png
+*_debug_*.png
+
+# Ignore timestamped plots (regenerated each run)
+*_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.png
 
 # Keep important visualizations for publication
 !wavelet_*.png
 !methodology_*.png
 !*_comparison.png
+!*_training_history.png
+!lstm_*_training_*.png
+!transformer_*_training_*.png
+!eegnet_*_training_*.png
 
 # Temporary result files with timestamps (regenerated each run)
 *_results_*[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*.json
