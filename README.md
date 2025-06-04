@@ -34,11 +34,19 @@ The project uses the MindBigData dataset format with the following structure:
 
 ### 🔧 Environment Requirements
 
-#### **System Requirements:**
-- **OS**: Windows 11 with WSL2 (Ubuntu) or Linux
+#### **🖥️ System Requirements:**
+- **OS**: Windows 11 with WSL2 (Ubuntu 22.04) **[RECOMMENDED]** or Linux
 - **Python**: 3.11+ (tested with Python 3.11.12)
 - **GPU**: NVIDIA GPU with CUDA Compute Capability 8.6+ (tested with RTX 3060)
 - **Memory**: 16GB+ RAM, 12GB+ GPU memory recommended
+
+#### **⚠️ IMPORTANT: WSL2 Environment**
+This project is **optimized for WSL2 (Windows Subsystem for Linux)**. All commands and paths are designed for Linux environment.
+
+**For Windows users:**
+1. **Install WSL2** with Ubuntu 22.04
+2. **Run all commands inside WSL2** (not Windows Command Prompt or PowerShell)
+3. **Access project files** through WSL2 filesystem
 
 #### **✅ Verified Working Configuration:**
 ```bash
@@ -59,10 +67,27 @@ GPU: NVIDIA RTX 3060 (12GB VRAM)
 
 ### 📦 Installation
 
+#### **Step 0: Enter WSL2 Environment (Windows Users)**
+```bash
+# Open Windows Terminal or Command Prompt
+wsl
+
+# You should now see a Linux prompt like:
+# username@computername:/mnt/c/Users/YourName$
+
+# Navigate to your desired directory (e.g., Documents)
+cd /mnt/c/Users/YourName/Documents/
+```
+
 #### **Step 1: Clone Repository**
 ```bash
+# Inside WSL2 environment
 git clone https://github.com/yourusername/consgradeeeg.git
 cd consgradeeeg
+
+# Verify you're in the correct directory
+pwd
+# Should show: /mnt/c/Users/YourName/Documents/consgradeeeg
 ```
 
 #### **Step 2: Install PyTorch with CUDA Support (Recommended)**
@@ -86,8 +111,11 @@ pip install scipy pywt
 pip install jupyter ipykernel
 ```
 
-#### **Step 4: Verify GPU Installation**
+#### **Step 4: Verify GPU Installation (Inside WSL2)**
 ```bash
+# IMPORTANT: Make sure you're inside WSL2 environment
+# Your prompt should look like: username@computername:/path$
+
 # Test PyTorch GPU
 python3 -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}'); print(f'GPU: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else \"No GPU\"}')"
 
@@ -95,13 +123,88 @@ python3 -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA a
 python3 -c "import tensorflow as tf; print(f'TensorFlow: {tf.__version__}'); print(f'GPU devices: {len(tf.config.list_physical_devices(\"GPU\"))} GPU(s) available')"
 ```
 
-**Expected Output:**
+**Expected Output (in WSL2):**
 ```
 PyTorch: 2.7.1+cu128
 CUDA available: True
 GPU: NVIDIA GeForce RTX 3060
 TensorFlow: 2.19.0
 GPU devices: 1 GPU(s) available
+```
+
+#### **🔧 Reproducibility Test**
+```bash
+# IMPORTANT: Make sure you're in WSL2 and in the project directory
+cd /mnt/c/Users/YourName/Documents/consgradeeeg
+
+# Test that you can run the best model
+python3 src/models/lstm_wavelet.py
+
+# Expected: Should complete training and achieve ~76% accuracy
+# This verifies the entire environment is working correctly
+```
+
+### 🧪 **Testing Repository Reproducibility**
+
+To ensure this repository works correctly on your system, follow these verification steps **inside WSL2**:
+
+#### **Step 1: Environment Verification**
+```bash
+# Enter WSL2 first
+wsl
+
+# Navigate to project directory
+cd /mnt/c/Users/YourName/Documents/consgradeeeg
+
+# Run comprehensive environment test
+python3 -c "
+import sys
+print('=== ENVIRONMENT VERIFICATION ===')
+print(f'Python: {sys.version}')
+
+# Test all required packages
+packages = ['torch', 'tensorflow', 'numpy', 'pandas', 'matplotlib', 'sklearn', 'scipy', 'pywt']
+for pkg in packages:
+    try:
+        module = __import__(pkg)
+        version = getattr(module, '__version__', 'unknown')
+        print(f'✅ {pkg}: {version}')
+    except ImportError:
+        print(f'❌ {pkg}: NOT INSTALLED')
+
+# Test GPU
+import torch
+print(f'✅ CUDA available: {torch.cuda.is_available()}')
+if torch.cuda.is_available():
+    print(f'✅ GPU: {torch.cuda.get_device_name(0)}')
+print('=== TEST COMPLETE ===')
+"
+```
+
+#### **Step 2: Data Loading Test**
+```bash
+# Test data loading
+python3 -c "
+import os
+print('=== DATA LOADING TEST ===')
+data_file = 'Data/EP1.01.txt'
+if os.path.exists(data_file):
+    print(f'✅ Data file found: {data_file}')
+    # Test loading first few lines
+    with open(data_file, 'r') as f:
+        lines = f.readlines()[:5]
+    print(f'✅ Data loaded: {len(lines)} sample lines')
+else:
+    print(f'❌ Data file not found: {data_file}')
+    print('Please ensure EP1.01.txt is in the Data/ directory')
+print('=== DATA TEST COMPLETE ===')
+"
+```
+
+#### **Step 3: Model Training Test**
+```bash
+# Test best model (should achieve ~76% accuracy)
+python3 src/models/lstm_wavelet.py
 ```
 
 ### Data Setup
@@ -459,16 +562,42 @@ model.gradient_checkpointing_enable()
 
 ### 🛠️ Advanced Setup & Troubleshooting
 
-#### **🐧 WSL2 Setup (Windows Users):**
+#### **🐧 WSL2 Setup (Windows Users) - DETAILED:**
+
+**Step 1: Install WSL2**
 ```bash
-# Install WSL2 with Ubuntu
+# In Windows PowerShell (as Administrator)
 wsl --install -d Ubuntu-22.04
 
-# Update system
+# Restart computer when prompted
+```
+
+**Step 2: First-time WSL2 Setup**
+```bash
+# After restart, Ubuntu will open automatically
+# Create username and password when prompted
+
+# Update system packages
 sudo apt update && sudo apt upgrade -y
 
-# Install Python 3.11
+# Install essential development tools
 sudo apt install python3.11 python3.11-pip python3.11-venv python3.11-dev
+sudo apt install git curl wget build-essential
+```
+
+**Step 3: Verify WSL2 Environment**
+```bash
+# Check you're in WSL2
+uname -a
+# Should show: Linux ... Microsoft ... WSL2
+
+# Check Python version
+python3 --version
+# Should show: Python 3.11.x
+
+# Check GPU access (if NVIDIA GPU)
+nvidia-smi
+# Should show your GPU information
 ```
 
 #### **🔧 NVIDIA Driver Setup:**
