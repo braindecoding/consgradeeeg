@@ -212,25 +212,34 @@ def main():
     """Main function for comprehensive wavelet analysis"""
     print("🚀 Comprehensive Wavelet Analysis for Publication")
     print("=" * 60)
-    
+
     # Load data
     data, labels = load_data_for_analysis()
     if data is None:
         return
-    
+
     # Create output directory
     os.makedirs('results/figures', exist_ok=True)
-    
+
     # Generate comprehensive comparison plot
     print("📊 Generating comprehensive wavelet analysis plot...")
     fig = create_comprehensive_comparison_plot(data, labels)
-    fig.savefig('results/figures/comprehensive_wavelet_analysis.png', 
+
+    # Save in multiple formats
+    fig.savefig('results/figures/comprehensive_wavelet_analysis.png',
                 dpi=300, bbox_inches='tight', facecolor='white')
+    fig.savefig('results/figures/comprehensive_wavelet_analysis.svg',
+                format='svg', bbox_inches='tight', facecolor='white')
+    fig.savefig('results/figures/comprehensive_wavelet_analysis.pdf',
+                format='pdf', bbox_inches='tight', facecolor='white')
     plt.close(fig)
-    
+
     print("✅ Comprehensive wavelet analysis completed!")
-    print("📊 Publication-quality plot saved to 'results/figures/comprehensive_wavelet_analysis.png'")
-    print("🎯 This plot is ready for inclusion in your research article!")
+    print("📊 Files saved in multiple formats:")
+    print("  PNG: results/figures/comprehensive_wavelet_analysis.png")
+    print("  SVG: results/figures/comprehensive_wavelet_analysis.svg")
+    print("  PDF: results/figures/comprehensive_wavelet_analysis.pdf")
+    print("🎯 SVG format is perfect for journal submission!")
 
 if __name__ == "__main__":
     main()

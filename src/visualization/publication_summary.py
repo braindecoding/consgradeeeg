@@ -170,23 +170,32 @@ def main():
     fig = create_publication_summary()
     
     if fig:
-        # Save high-quality figure
-        output_path = 'results/figures/publication_summary.png'
-        fig.savefig(output_path, dpi=300, bbox_inches='tight', 
+        # Save in multiple formats for maximum compatibility
+        base_path = 'results/figures/publication_summary'
+
+        # PNG for high-quality raster
+        png_path = f'{base_path}.png'
+        fig.savefig(png_path, dpi=300, bbox_inches='tight',
                    facecolor='white', edgecolor='none')
+
+        # SVG for perfect vector graphics
+        svg_path = f'{base_path}.svg'
+        fig.savefig(svg_path, format='svg', bbox_inches='tight',
+                   facecolor='white', edgecolor='none')
+
+        # PDF for print compatibility
+        pdf_path = f'{base_path}.pdf'
+        fig.savefig(pdf_path, format='pdf', bbox_inches='tight',
+                   facecolor='white', edgecolor='none')
+
         plt.close(fig)
-        
-        print(f"✅ Publication summary saved to: {output_path}")
-        print("🎯 This comprehensive figure is ready for journal submission!")
+
+        print(f"✅ Publication summary saved in multiple formats:")
+        print(f"  PNG (300 DPI): {png_path}")
+        print(f"  SVG (Vector): {svg_path}")
+        print(f"  PDF (Vector): {pdf_path}")
+        print("🎯 SVG format is perfect for journal submission!")
         print("📄 Includes all key results, methodology, and findings")
-        
-        # Also save as PDF for vector graphics
-        pdf_path = 'results/figures/publication_summary.pdf'
-        fig = create_publication_summary()
-        fig.savefig(pdf_path, format='pdf', bbox_inches='tight', 
-                   facecolor='white', edgecolor='none')
-        plt.close(fig)
-        print(f"📄 PDF version saved to: {pdf_path}")
         
     else:
         print("❌ Failed to create publication summary")

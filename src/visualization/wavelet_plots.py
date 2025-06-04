@@ -230,11 +230,13 @@ def compare_digits(data, labels, digit1=6, digit2=9):
     fig1 = plot_wavelet_decomposition(trial1[frontal_channel],
                                      title=f'Wavelet Decomposition - Digit {digit1} - Frontal Channel (F3)')
     fig1.savefig(f'results/figures/wavelet_decomposition_digit{digit1}.png', dpi=300, bbox_inches='tight')
+    fig1.savefig(f'results/figures/wavelet_decomposition_digit{digit1}.svg', format='svg', bbox_inches='tight')
     plt.close(fig1)
 
     fig2 = plot_wavelet_decomposition(trial2[frontal_channel],
                                      title=f'Wavelet Decomposition - Digit {digit2} - Frontal Channel (F3)')
     fig2.savefig(f'results/figures/wavelet_decomposition_digit{digit2}.png', dpi=300, bbox_inches='tight')
+    fig2.savefig(f'results/figures/wavelet_decomposition_digit{digit2}.svg', format='svg', bbox_inches='tight')
     plt.close(fig2)
 
     # Frontal channel (F3) - Wavelet scalogram
@@ -243,11 +245,13 @@ def compare_digits(data, labels, digit1=6, digit2=9):
     fig3 = plot_wavelet_scalogram(trial1[frontal_channel],
                                  title=f'Wavelet Scalogram - Digit {digit1} - Frontal Channel (F3)')
     fig3.savefig(f'results/figures/wavelet_scalogram_digit{digit1}.png', dpi=300, bbox_inches='tight')
+    fig3.savefig(f'results/figures/wavelet_scalogram_digit{digit1}.svg', format='svg', bbox_inches='tight')
     plt.close(fig3)
 
     fig4 = plot_wavelet_scalogram(trial2[frontal_channel],
                                  title=f'Wavelet Scalogram - Digit {digit2} - Frontal Channel (F3)')
     fig4.savefig(f'results/figures/wavelet_scalogram_digit{digit2}.png', dpi=300, bbox_inches='tight')
+    fig4.savefig(f'results/figures/wavelet_scalogram_digit{digit2}.svg', format='svg', bbox_inches='tight')
     plt.close(fig4)
 
     # Power spectrum comparison
@@ -256,11 +260,13 @@ def compare_digits(data, labels, digit1=6, digit2=9):
     fig5 = plot_power_spectrum(trial1[frontal_channel],
                               title=f'Power Spectrum - Digit {digit1} - Frontal Channel (F3)')
     fig5.savefig(f'results/figures/power_spectrum_digit{digit1}.png', dpi=300, bbox_inches='tight')
+    fig5.savefig(f'results/figures/power_spectrum_digit{digit1}.svg', format='svg', bbox_inches='tight')
     plt.close(fig5)
 
     fig6 = plot_power_spectrum(trial2[frontal_channel],
                               title=f'Power Spectrum - Digit {digit2} - Frontal Channel (F3)')
     fig6.savefig(f'results/figures/power_spectrum_digit{digit2}.png', dpi=300, bbox_inches='tight')
+    fig6.savefig(f'results/figures/power_spectrum_digit{digit2}.svg', format='svg', bbox_inches='tight')
     plt.close(fig6)
 
     # Occipital channel comparison
@@ -269,15 +275,18 @@ def compare_digits(data, labels, digit1=6, digit2=9):
     fig7 = plot_wavelet_decomposition(trial1[occipital_channel],
                                      title=f'Wavelet Decomposition - Digit {digit1} - Occipital Channel (O1)')
     fig7.savefig(f'results/figures/wavelet_decomp_digit{digit1}_occipital.png', dpi=300, bbox_inches='tight')
+    fig7.savefig(f'results/figures/wavelet_decomp_digit{digit1}_occipital.svg', format='svg', bbox_inches='tight')
     plt.close(fig7)
 
     fig8 = plot_wavelet_decomposition(trial2[occipital_channel],
                                      title=f'Wavelet Decomposition - Digit {digit2} - Occipital Channel (O1)')
     fig8.savefig(f'results/figures/wavelet_decomp_digit{digit2}_occipital.png', dpi=300, bbox_inches='tight')
+    fig8.savefig(f'results/figures/wavelet_decomp_digit{digit2}_occipital.svg', format='svg', bbox_inches='tight')
     plt.close(fig8)
 
     print(f"✅ Wavelet visualizations saved to 'results/figures/' directory")
-    print(f"📊 Generated {8} publication-quality plots for article use")
+    print(f"📊 Generated {8} publication-quality plots in PNG and SVG formats")
+    print(f"🎯 SVG files are perfect for journal submission with infinite scalability!")
 
 def main():
     """Main function"""

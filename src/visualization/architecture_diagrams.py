@@ -308,36 +308,54 @@ def create_data_pipeline_diagram():
     return fig
 
 def main():
-    """Generate all architecture diagrams"""
+    """Generate all architecture diagrams in multiple formats"""
     print("🏗️ Generating Model Architecture Diagrams")
     print("=" * 50)
-    
+
     os.makedirs('results/figures', exist_ok=True)
-    
+
     # Generate LSTM architecture
     print("📊 Creating LSTM + Wavelet architecture diagram...")
     fig1 = create_lstm_wavelet_architecture()
+    # Save in multiple formats
     fig1.savefig('results/figures/lstm_wavelet_architecture.png', dpi=300, bbox_inches='tight')
+    fig1.savefig('results/figures/lstm_wavelet_architecture.svg', format='svg', bbox_inches='tight')
+    fig1.savefig('results/figures/lstm_wavelet_architecture.pdf', format='pdf', bbox_inches='tight')
     plt.close(fig1)
-    
+
     # Generate Transformer architecture
     print("📊 Creating Transformer + Wavelet architecture diagram...")
     fig2 = create_transformer_architecture()
+    # Save in multiple formats
     fig2.savefig('results/figures/transformer_architecture.png', dpi=300, bbox_inches='tight')
+    fig2.savefig('results/figures/transformer_architecture.svg', format='svg', bbox_inches='tight')
+    fig2.savefig('results/figures/transformer_architecture.pdf', format='pdf', bbox_inches='tight')
     plt.close(fig2)
-    
+
     # Generate data pipeline
     print("📊 Creating data processing pipeline diagram...")
     fig3 = create_data_pipeline_diagram()
+    # Save in multiple formats
     fig3.savefig('results/figures/data_pipeline.png', dpi=300, bbox_inches='tight')
+    fig3.savefig('results/figures/data_pipeline.svg', format='svg', bbox_inches='tight')
+    fig3.savefig('results/figures/data_pipeline.pdf', format='pdf', bbox_inches='tight')
     plt.close(fig3)
-    
+
     print("✅ Architecture diagrams generated successfully!")
-    print("📄 Files saved:")
-    print("  - results/figures/lstm_wavelet_architecture.png")
-    print("  - results/figures/transformer_architecture.png")
-    print("  - results/figures/data_pipeline.png")
-    print("🎯 These diagrams are ready for publication!")
+    print("📄 Files saved in multiple formats:")
+    print("  PNG (300 DPI):")
+    print("    - results/figures/lstm_wavelet_architecture.png")
+    print("    - results/figures/transformer_architecture.png")
+    print("    - results/figures/data_pipeline.png")
+    print("  SVG (Vector):")
+    print("    - results/figures/lstm_wavelet_architecture.svg")
+    print("    - results/figures/transformer_architecture.svg")
+    print("    - results/figures/data_pipeline.svg")
+    print("  PDF (Vector):")
+    print("    - results/figures/lstm_wavelet_architecture.pdf")
+    print("    - results/figures/transformer_architecture.pdf")
+    print("    - results/figures/data_pipeline.pdf")
+    print("🎯 SVG files are perfect for journal submission!")
 
 if __name__ == "__main__":
     main()

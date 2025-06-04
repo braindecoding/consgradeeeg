@@ -309,36 +309,51 @@ VALIDATION METHODOLOGY:
     return fig
 
 def main():
-    """Generate all statistical analysis figures"""
+    """Generate all statistical analysis figures in multiple formats"""
     print("📊 Generating Statistical Analysis Figures")
     print("=" * 50)
-    
+
     os.makedirs('results/figures', exist_ok=True)
-    
+
     # Generate performance comparison
     print("📈 Creating performance comparison analysis...")
     fig1 = create_performance_comparison()
     fig1.savefig('results/figures/performance_comparison.png', dpi=300, bbox_inches='tight')
+    fig1.savefig('results/figures/performance_comparison.svg', format='svg', bbox_inches='tight')
+    fig1.savefig('results/figures/performance_comparison.pdf', format='pdf', bbox_inches='tight')
     plt.close(fig1)
-    
+
     # Generate statistical significance
     print("📊 Creating statistical significance analysis...")
     fig2 = create_statistical_significance()
     fig2.savefig('results/figures/statistical_significance.png', dpi=300, bbox_inches='tight')
+    fig2.savefig('results/figures/statistical_significance.svg', format='svg', bbox_inches='tight')
+    fig2.savefig('results/figures/statistical_significance.pdf', format='pdf', bbox_inches='tight')
     plt.close(fig2)
-    
+
     # Generate experimental setup
     print("🔬 Creating experimental setup diagram...")
     fig3 = create_experimental_setup()
     fig3.savefig('results/figures/experimental_setup.png', dpi=300, bbox_inches='tight')
+    fig3.savefig('results/figures/experimental_setup.svg', format='svg', bbox_inches='tight')
+    fig3.savefig('results/figures/experimental_setup.pdf', format='pdf', bbox_inches='tight')
     plt.close(fig3)
-    
+
     print("✅ Statistical analysis figures generated successfully!")
-    print("📄 Files saved:")
-    print("  - results/figures/performance_comparison.png")
-    print("  - results/figures/statistical_significance.png")
-    print("  - results/figures/experimental_setup.png")
-    print("🎯 These figures provide comprehensive statistical analysis for publication!")
+    print("📄 Files saved in multiple formats:")
+    print("  PNG (300 DPI):")
+    print("    - results/figures/performance_comparison.png")
+    print("    - results/figures/statistical_significance.png")
+    print("    - results/figures/experimental_setup.png")
+    print("  SVG (Vector):")
+    print("    - results/figures/performance_comparison.svg")
+    print("    - results/figures/statistical_significance.svg")
+    print("    - results/figures/experimental_setup.svg")
+    print("  PDF (Vector):")
+    print("    - results/figures/performance_comparison.pdf")
+    print("    - results/figures/statistical_significance.pdf")
+    print("    - results/figures/experimental_setup.pdf")
+    print("🎯 SVG files are perfect for journal submission with infinite scalability!")
 
 if __name__ == "__main__":
     main()

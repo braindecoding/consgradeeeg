@@ -256,18 +256,20 @@ python experiments/hybrid_models.py
 
 #### Publication-Ready Figures
 ```bash
-# Generate ALL publication figures (21 figures total)
+# Generate ALL publication figures (40+ files in multiple formats)
 python3 src/visualization/complete_publication_figures.py
 
 # This creates:
-# - Model architecture diagrams
-# - Statistical analysis plots
-# - Wavelet analysis visualizations
-# - Performance comparison charts
-# - Publication summary (journal-ready)
+# - Model architecture diagrams (PNG/SVG/PDF)
+# - Statistical analysis plots (PNG/SVG/PDF)
+# - Wavelet analysis visualizations (PNG/SVG)
+# - Performance comparison charts (PNG/SVG/PDF)
+# - Publication summary (PNG/SVG/PDF)
 #
-# Output: results/figures/ (6.6 MB, 300 DPI)
+# Output: results/figures/
+# Formats: PNG (300 DPI), SVG (vector), PDF (vector)
 # Time: ~3-5 minutes
+# Recommended: Use SVG for journal submission
 ```
 
 ## 🏗️ Project Structure
@@ -703,39 +705,46 @@ python3 src/visualization/publication_summary.py             # Final summary
 - **Model Convergence**: Early stopping visualization
 - **Performance Tracking**: Validation metrics over time
 
-**Complete Output Files (21 figures total):**
+**Complete Output Files (40+ files in multiple formats):**
 ```
-📊 Architecture & Pipeline:
-├── lstm_wavelet_architecture.png      # Best model architecture
-├── transformer_architecture.png       # Transformer design
-└── data_pipeline.png                  # Processing workflow
+📊 Architecture & Pipeline (3 figures × 3 formats = 9 files):
+├── lstm_wavelet_architecture.png/.svg/.pdf    # Best model architecture
+├── transformer_architecture.png/.svg/.pdf     # Transformer design
+└── data_pipeline.png/.svg/.pdf                # Processing workflow
 
-📈 Performance & Statistics:
-├── performance_comparison.png          # Model comparison
-├── statistical_significance.png       # p-value analysis
-└── experimental_setup.png             # Methodology
+📈 Performance & Statistics (3 figures × 3 formats = 9 files):
+├── performance_comparison.png/.svg/.pdf       # Model comparison
+├── statistical_significance.png/.svg/.pdf     # p-value analysis
+└── experimental_setup.png/.svg/.pdf           # Methodology
 
-🌊 Wavelet Analysis:
-├── comprehensive_wavelet_analysis.png  # Multi-channel analysis
-├── wavelet_decomposition_digit6.png    # Signal breakdown
-├── wavelet_decomposition_digit9.png    # Signal breakdown
-├── wavelet_scalogram_digit6.png        # Time-frequency
-├── wavelet_scalogram_digit9.png        # Time-frequency
-├── power_spectrum_digit6.png           # Frequency domain
-├── power_spectrum_digit9.png           # Frequency domain
-├── wavelet_decomp_digit6_occipital.png # Occipital analysis
-└── wavelet_decomp_digit9_occipital.png # Occipital analysis
+🌊 Wavelet Analysis (8 figures × 2 formats = 16 files):
+├── comprehensive_wavelet_analysis.png/.svg/.pdf  # Multi-channel analysis
+├── wavelet_decomposition_digit6.png/.svg         # Signal breakdown
+├── wavelet_decomposition_digit9.png/.svg         # Signal breakdown
+├── wavelet_scalogram_digit6.png/.svg             # Time-frequency
+├── wavelet_scalogram_digit9.png/.svg             # Time-frequency
+├── power_spectrum_digit6.png/.svg                # Frequency domain
+├── power_spectrum_digit9.png/.svg                # Frequency domain
+├── wavelet_decomp_digit6_occipital.png/.svg      # Occipital analysis
+└── wavelet_decomp_digit9_occipital.png/.svg      # Occipital analysis
 
-📊 Training History:
-├── eeg_lstm_wavelet_training_history.png    # LSTM curves
-├── eeg_transformer_training_history.png     # Transformer curves
-├── eeg_cnn_training_history.png             # CNN curves
-└── eeg_pytorch_training_history.png         # PyTorch curves
+📊 Training History (4 PNG files):
+├── eeg_lstm_wavelet_training_history.png         # LSTM curves
+├── eeg_transformer_training_history.png          # Transformer curves
+├── eeg_cnn_training_history.png                  # CNN curves
+└── eeg_pytorch_training_history.png              # PyTorch curves
 
-📄 Publication Ready:
-├── publication_summary.png            # Main figure (300 DPI)
-└── publication_summary.pdf            # Vector graphics
+📄 Publication Ready (3 formats):
+├── publication_summary.png                       # High-res raster (300 DPI)
+├── publication_summary.svg                       # Perfect vector (RECOMMENDED)
+└── publication_summary.pdf                       # Print-compatible vector
 ```
+
+#### **🎯 Recommended Formats for Journal Submission:**
+- **Primary Figures**: Use `.svg` format (infinite scalability, small size)
+- **Backup/Alternative**: Use `.png` format (300 DPI, widely compatible)
+- **Print Version**: Use `.pdf` format (vector graphics for print)
+- **File Size**: SVG typically 50-80% smaller than equivalent high-res PNG
 
 #### **🧠 Key Features for Publication:**
 - **High-resolution outputs** (300 DPI) suitable for journal submission
@@ -770,11 +779,22 @@ python3 src/visualization/publication_summary.py             # Final summary
 - **Specifications**: Scientific visualization with frequency-domain insights
 
 #### **📊 Figure Quality Specifications:**
-- **Resolution**: 300 DPI minimum for all figures
-- **Format**: PNG for submission, PDF for presentations
+- **Resolution**: 300 DPI minimum for PNG figures
+- **Formats Available**:
+  - **SVG** (RECOMMENDED): Perfect vector graphics, infinite scalability
+  - **PNG**: High-resolution raster (300 DPI)
+  - **PDF**: Vector graphics for print compatibility
 - **Size**: Optimized for single/double column journal layouts
 - **Colors**: Print-safe color schemes, colorblind-friendly palettes
 - **Text**: Readable fonts (minimum 8pt), professional scientific style
+
+#### **🎨 SVG Format Benefits:**
+- **✅ Infinite Scalability**: No quality loss at any zoom level
+- **✅ Small File Size**: Typically smaller than high-resolution PNG
+- **✅ Editable Text**: Text remains selectable and searchable
+- **✅ Journal Preferred**: Most journals prefer vector graphics
+- **✅ Web Compatible**: Perfect for online publications
+- **✅ Print Quality**: Crisp output at any print resolution
 
 #### **🔬 Reproducibility Documentation:**
 ```bash
