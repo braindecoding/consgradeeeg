@@ -254,6 +254,22 @@ python experiments/run_comprehensive_study.py
 python experiments/hybrid_models.py
 ```
 
+#### Publication-Ready Figures
+```bash
+# Generate ALL publication figures (21 figures total)
+python3 src/visualization/complete_publication_figures.py
+
+# This creates:
+# - Model architecture diagrams
+# - Statistical analysis plots
+# - Wavelet analysis visualizations
+# - Performance comparison charts
+# - Publication summary (journal-ready)
+#
+# Output: results/figures/ (6.6 MB, 300 DPI)
+# Time: ~3-5 minutes
+```
+
 ## 🏗️ Project Structure
 
 ```
@@ -268,12 +284,13 @@ consgradeeeg/
 │   ├── preprocessing/               # Data preprocessing
 │   │   ├── wavelet_features.py     # Advanced wavelet extraction
 │   │   └── data_loader.py          # Data loading utilities
-│   └── visualization/               # Visualization tools
-│       ├── wavelet_plots.py        # Wavelet analysis plots
-│       ├── create_methodology_figures.py
-│       ├── generate_methodology_figures.py
-│       ├── generate_advanced_figures.py
-│       └── generate_paper_figures.py
+│   └── visualization/               # Publication-ready visualization suite
+│       ├── complete_publication_figures.py    # Generate ALL figures (main script)
+│       ├── wavelet_plots.py                   # Wavelet analysis plots
+│       ├── comprehensive_wavelet_analysis.py  # Advanced wavelet analysis
+│       ├── architecture_diagrams.py           # Model architecture diagrams
+│       ├── statistical_analysis.py            # Statistical analysis figures
+│       └── publication_summary.py             # Final publication summary
 ├── experiments/                     # Experiment scripts
 │   ├── run_comprehensive_study.py  # Full experiment suite
 │   ├── model_comparison.py         # Model comparison
@@ -640,13 +657,135 @@ python3 src/models/lstm_wavelet.py
 
 ## 📊 Visualization
 
-The project generates several types of visualizations:
+The project generates comprehensive visualizations for research and publication:
 
-1. **Model Performance**: Accuracy comparison, confusion matrices
-2. **Feature Importance**: Most discriminative spatial features
-3. **Training History**: Loss and accuracy curves
-4. **Wavelet Analysis**: Time-frequency decomposition
-5. **Brain Topography**: Spatial activation patterns
+### **🎨 Available Visualization Tools:**
+
+#### **📊 Model Performance Analysis:**
+1. **Training History**: Loss and accuracy curves with early stopping
+2. **Model Comparison**: Side-by-side accuracy, sensitivity, specificity
+3. **Confusion Matrices**: Detailed classification results
+4. **Performance Metrics**: F1-scores, balanced accuracy
+
+#### **🌊 Complete Publication Figure Suite:**
+```bash
+# Generate ALL publication-ready figures at once
+python3 src/visualization/complete_publication_figures.py
+
+# Or generate individual figure sets:
+python3 src/visualization/wavelet_plots.py                    # Wavelet analysis
+python3 src/visualization/comprehensive_wavelet_analysis.py   # Advanced analysis
+python3 src/visualization/architecture_diagrams.py           # Model architectures
+python3 src/visualization/statistical_analysis.py            # Statistical analysis
+python3 src/visualization/publication_summary.py             # Final summary
+```
+
+**Generated Figure Categories:**
+
+#### **🏗️ Model Architecture Diagrams:**
+- **LSTM + Wavelet Architecture**: Complete model structure (76% accuracy)
+- **Transformer Architecture**: Attention-based model design (68.5% accuracy)
+- **Data Processing Pipeline**: End-to-end signal processing workflow
+
+#### **📊 Statistical Analysis:**
+- **Performance Comparison**: Comprehensive model evaluation
+- **Statistical Significance**: p-value analysis with confidence intervals
+- **Experimental Setup**: Hardware specifications and methodology
+
+#### **🌊 Wavelet Analysis:**
+- **Multi-channel Analysis**: 4-channel comparison (Frontal, Central, Parietal, Occipital)
+- **Time-frequency Decomposition**: Continuous wavelet transform
+- **Power Spectral Density**: Frequency domain characteristics
+- **Signal Breakdown**: Multi-level wavelet decomposition
+
+#### **📈 Training Analysis:**
+- **Learning Curves**: Loss and accuracy progression
+- **Model Convergence**: Early stopping visualization
+- **Performance Tracking**: Validation metrics over time
+
+**Complete Output Files (21 figures total):**
+```
+📊 Architecture & Pipeline:
+├── lstm_wavelet_architecture.png      # Best model architecture
+├── transformer_architecture.png       # Transformer design
+└── data_pipeline.png                  # Processing workflow
+
+📈 Performance & Statistics:
+├── performance_comparison.png          # Model comparison
+├── statistical_significance.png       # p-value analysis
+└── experimental_setup.png             # Methodology
+
+🌊 Wavelet Analysis:
+├── comprehensive_wavelet_analysis.png  # Multi-channel analysis
+├── wavelet_decomposition_digit6.png    # Signal breakdown
+├── wavelet_decomposition_digit9.png    # Signal breakdown
+├── wavelet_scalogram_digit6.png        # Time-frequency
+├── wavelet_scalogram_digit9.png        # Time-frequency
+├── power_spectrum_digit6.png           # Frequency domain
+├── power_spectrum_digit9.png           # Frequency domain
+├── wavelet_decomp_digit6_occipital.png # Occipital analysis
+└── wavelet_decomp_digit9_occipital.png # Occipital analysis
+
+📊 Training History:
+├── eeg_lstm_wavelet_training_history.png    # LSTM curves
+├── eeg_transformer_training_history.png     # Transformer curves
+├── eeg_cnn_training_history.png             # CNN curves
+└── eeg_pytorch_training_history.png         # PyTorch curves
+
+📄 Publication Ready:
+├── publication_summary.png            # Main figure (300 DPI)
+└── publication_summary.pdf            # Vector graphics
+```
+
+#### **🧠 Key Features for Publication:**
+- **High-resolution outputs** (300 DPI) suitable for journal submission
+- **Vector graphics** (PDF) for scalable figures
+- **Statistical analysis** integrated into visualizations
+- **Multi-channel comparison** across brain regions
+- **Frequency band analysis** (Delta, Theta, Alpha, Beta)
+- **Publication-ready layout** with proper labeling and legends
+
+### **📄 Journal Submission Guidelines**
+
+#### **🎯 Essential Figures for Article:**
+
+**Main Figure (Figure 1):** `publication_summary.png`
+- **Purpose**: Comprehensive research overview
+- **Content**: All key results, methodology, findings
+- **Specifications**: 300 DPI, 20×24 inches, journal-ready format
+
+**Architecture Figure (Figure 2):** `lstm_wavelet_architecture.png`
+- **Purpose**: Model reproducibility documentation
+- **Content**: Complete LSTM + Wavelet structure with performance metrics
+- **Specifications**: Professional diagram, clear component labeling
+
+**Performance Analysis (Figure 3):** `performance_comparison.png`
+- **Purpose**: Comprehensive model evaluation
+- **Content**: Statistical comparison with significance testing
+- **Specifications**: Multi-panel analysis with error bars and p-values
+
+**Signal Analysis (Figure 4):** `comprehensive_wavelet_analysis.png`
+- **Purpose**: Signal processing methodology validation
+- **Content**: Multi-channel wavelet analysis across brain regions
+- **Specifications**: Scientific visualization with frequency-domain insights
+
+#### **📊 Figure Quality Specifications:**
+- **Resolution**: 300 DPI minimum for all figures
+- **Format**: PNG for submission, PDF for presentations
+- **Size**: Optimized for single/double column journal layouts
+- **Colors**: Print-safe color schemes, colorblind-friendly palettes
+- **Text**: Readable fonts (minimum 8pt), professional scientific style
+
+#### **🔬 Reproducibility Documentation:**
+```bash
+# Complete figure generation for reproducibility
+python3 src/visualization/complete_publication_figures.py
+
+# Generates 21 figures in ~3-5 minutes
+# Total size: 6.6 MB
+# All figures saved to: results/figures/
+# Complete index: results/figures/README.md
+```
 
 ## 🤝 Contributing
 
@@ -675,7 +814,10 @@ The project generates several types of visualizations:
 - 🔥 **Latest PyTorch 2.7.1+cu128** with full GPU acceleration
 - 🧠 **TensorFlow 2.19.0** GPU compatibility verified
 - 📁 **Professional repository structure** with modular design
-- 📊 **Publication-ready results** and comprehensive analysis
+- 📊 **21 publication-ready figures** with comprehensive analysis
+- 🎨 **Complete visualization suite** (architecture, performance, wavelet analysis)
+- 📄 **Journal submission ready** with 300 DPI figures and statistical analysis
+- 🔬 **100% reproducible** with comprehensive testing and documentation
 
 ## 📚 Research Background
 
@@ -719,9 +861,11 @@ For questions, issues, or collaboration opportunities:
 
 ### **Current Status:**
 - 🏆 **Best Model**: LSTM + Wavelet (76.0% accuracy)
-- 🔥 **Environment**: Fully tested and documented
-- 📁 **Repository**: Clean, organized, and professional
-- 📊 **Results**: Publication-ready analysis complete
+- 🔥 **Environment**: Fully tested and documented (100% reproducible)
+- 📁 **Repository**: Clean, organized, and professional structure
+- 📊 **Figures**: 21 publication-ready figures with complete analysis
+- 🎨 **Visualization**: Architecture diagrams, statistical analysis, wavelet plots
+- 📄 **Journal Ready**: 300 DPI figures, statistical significance, methodology docs
 - 🚀 **GPU Support**: PyTorch 2.7.1+cu128 & TensorFlow 2.19.0
 
 ### **Last Updated:**

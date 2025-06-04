@@ -207,7 +207,7 @@ data/
 *.fdt
 
 # Model checkpoints and training outputs
-models/
+results/models/
 checkpoints/
 *.pth
 *.h5
@@ -215,8 +215,8 @@ checkpoints/
 *.joblib
 
 # Generated figures and plots - selective ignoring
-figures/
-plots/
+#figures/
+#plots/
 
 # Ignore temporary/experimental plots
 *_temp_*.png
